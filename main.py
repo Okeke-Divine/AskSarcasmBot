@@ -104,11 +104,11 @@ def check_and_comment():
                 reply_text = generate_reply(post.title)
                 if reply_text:
                     # Post comment
-                    # post.reply(reply_text)
-                    print(reply_text)
+                    post.reply(reply_text)
                     save_processed_post(post.id)
                     logging.info(f"Commented on {post.title} #({post.id}): {reply_text}")
                     print(f"Commented on: {post.title}")
+                    print(reply_text)
                     return  # Only comment on one post per check
     except Exception as e:
         logging.error(f"Reddit error: {str(e)}")
@@ -126,8 +126,8 @@ def main():
         time.sleep(60)
 
 if __name__ == "__main__":
-    # main()
-    check_and_comment()
+    main()
+    # check_and_comment()
 
 # if __name__ == "__main__":
 #     logging.info("Session started")
