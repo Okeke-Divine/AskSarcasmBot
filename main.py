@@ -29,8 +29,7 @@ REDDIT = praw.Reddit(
 COHERE = cohere.Client(os.getenv('COHERE_API_KEY'))
 
 MODIFIERS = [
-    "respond exactly like a real human would - use casual language, sarcastic humor, and natural imperfections. " 
-    "and relatable analogies. Avoid AI patterns and formal responses."
+    "Respond like a genuine Reddit user - use casual language, mild sarcasm, and occasional typos. Keep it conversational with 1-2 short sentences max. Avoid formal structure and AI phrasing."
 ]
 
 PROCESSED_POSTS_FILE = 'processed_posts.txt'
@@ -55,24 +54,23 @@ def build_prompt(post_title):
     if not post_title.endswith("?"):
         post_title += "?"
     
-    prompt = f"Act as a seasoned Redditor responding to r/{SUBREDDIT} {modifier}:\n\n"
+    prompt = f"Write a Reddit comment responding to this post on r/{SUBREDDIT}. {modifier}:\n\n"
+    prompt += f"{post_title}\n\n"
+
     prompt += f"""
     Follow these rules: 
-            1. Maximum 200 tokens (about 40 words)
-            2. End responses naturally
-            3. Keep responses SHORT (max 1-3 sentences)
-            4. Style Guide:
-- Sound like a real human comment, not AI
-- Use internet slang 
-- 1-2 sentences max
-            5. Content Rules:
-- No perfect grammar
-            6. Extra
-            - Respond like a sarcastic Reddit veteran using an austrian accent
-            -  Use 80% lowercase letters
-            - Use common abbreviations (ikr, fr, smh, tl;dr)
+    - No lists/bullets
+    - Maximum 200 tokens (about 40 words)
+    - End responses naturally
+    - Keep responses SHORT (max 1-3 sentences)
+    - Style Guide:
+    - Sound like a real human comment, not formal AI
+    - Use internet slang occasionally
+    - 1-2 sentences max
+    - No perfect grammar
+    -  Use 80% lowercase letters
+    - Use common abbreviations occasionally (lol,fr, smh)
         """
-    prompt += f"Post Question: {post_title}\n\n"
 
 
     return prompt
@@ -106,9 +104,10 @@ def check_and_comment():
                 reply_text = generate_reply(post.title)
                 if reply_text:
                     # Post comment
-                    post.reply(reply_text)
+                    # post.reply(reply_text)
+                    print(reply_text)
                     save_processed_post(post.id)
-                    logging.info(f"Commented on {post.id}: {reply_text[:50]}...")
+                    logging.info(f"Commented on {post.title} #({post.id}): {reply_text}")
                     print(f"Commented on: {post.title}")
                     return  # Only comment on one post per check
     except Exception as e:
