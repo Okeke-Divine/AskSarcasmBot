@@ -151,12 +151,13 @@ def ping():
     print(">>> server pinged")
     return "pong", 200
 
-@app.route('/check_and_comment')
-def check_and_comment():
-    print(">>> [API] run threads")
-    check_and_comment()
-    return "pong", 200
 
+def start_threads():
+    print("=== Bot Started ===")
+    threading.Thread(target=schedule_loop, daemon=True).start()
+
+    # Start ping loop
+    threading.Thread(target=ping_loop, daemon=True).start()
 
 if __name__ == "__main__":
     print("=== Bot Started ===")
@@ -173,3 +174,5 @@ if __name__ == "__main__":
     log = logging.getLogger('werkzeug')
     log.setLevel(logging.ERROR)
     app.run(host='0.0.0.0', port=port, debug=False)
+else:
+    start_threads()
