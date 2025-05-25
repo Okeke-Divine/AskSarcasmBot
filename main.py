@@ -152,7 +152,7 @@ def ping():
     return "pong", 200
 
 @app.route('/check_and_comment')
-def ping():
+def check_and_comment():
     print(">>> [API] run threads")
     check_and_comment()
     return "pong", 200
