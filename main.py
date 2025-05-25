@@ -71,9 +71,9 @@ def build_prompt(post_title):
     - Style Guide:
       - Sound like a real human comment, not formal AI
       - Use internet slang occasionally
-      - No perfect grammar
-      - Use 80% lowercase letters
-      - Use common abbreviations occasionally (lol, fr, smh)
+      - No perfect grammar (slightly mispell words occationaly)
+      - Use 90% lowercase letters
+      - Use common GEN-Z abbreviations occasionally (lol, fr, smh)
     """
     return prompt
 
