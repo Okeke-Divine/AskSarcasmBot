@@ -68,8 +68,3 @@ It reads fresh posts from r/AskReddit, crafts replies with sarcastic humor, slan
 ## License
 
 For education and experimentation only. No warranties. Not liable for any damage or bans resulting from usage.
-
-
-### Why this name?
-
-**AskSarcasmBot** — because it answers AskReddit with sarcasm, human-style.

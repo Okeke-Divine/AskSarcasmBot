@@ -19,3 +19,9 @@ The Singularity will happen within the nächste decade. Computer werden so intell
 2025-05-25 18:41:45 - Retrying due to ReadTimeout(ReadTimeoutError("HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16.0)")) status: GET https://oauth.reddit.com/r/AskReddit/new
 2025-05-25 18:41:52 - HTTP Request: POST https://api.cohere.com/v1/generate "HTTP/1.1 200 OK"
 2025-05-25 18:41:52 - Commented on What’s something you were taught as a kid that you later found out was completely wrong? #(1kv8bxz): As a kid I was taught not to judge a book by its cover but later in life found out that's literally the only thing you can do on Tinder as women mainly use that platform for ego boosting and evaluating potential hookups based on hotness alone
+2025-05-25 18:43:07 - === Bot Started ===
+2025-05-25 18:43:26 - Retrying due to ReadTimeout(ReadTimeoutError("HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16.0)")) status: GET https://oauth.reddit.com/r/AskReddit/new
+2025-05-25 18:43:33 - HTTP Request: POST https://api.cohere.com/v1/generate "HTTP/1.1 200 OK"
+2025-05-25 18:43:50 - Retrying due to ReadTimeout(ReadTimeoutError("HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16.0)")) status: POST https://oauth.reddit.com/api/comment/
+2025-05-25 18:44:08 - Retrying due to ConnectTimeout(MaxRetryError("HTTPSConnectionPool(host='oauth.reddit.com', port=443): Max retries exceeded with url: /api/comment/?raw_json=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x0000019958A09350>, 'Connection to oauth.reddit.com timed out. (connect timeout=16.0)'))")) status: POST https://oauth.reddit.com/api/comment/
+2025-05-25 18:44:27 - Reddit error: error with request HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16.0)

@@ -4,10 +4,16 @@ import praw
 import schedule
 import time
 import logging
+import requests
 from datetime import datetime
 from dotenv import load_dotenv
+from flask import Flask
+from threading import Thread, Event
 
 load_dotenv()
+
+app = Flask(__name__)
+keep_alive_event = Event()
 
 # Configure logging
 logging.basicConfig(
@@ -113,21 +119,73 @@ def check_and_comment():
     except Exception as e:
         logging.error(f"Reddit error: {str(e)}")
 
-def main():
-    logging.info("=== Bot Started ===")
-    # Initial check
-    check_and_comment()
-    
-    # Schedule hourly checks
-    schedule.every(59).minutes.do(check_and_comment)
-    
-    while True:
+def run_scheduler():
+    while not keep_alive_event.is_set():
         schedule.run_pending()
-        time.sleep(60)
+        time.sleep(1)
+
+def start_server():
+    port = int(os.environ.get('PORT', 8000))
+    app.run(host='0.0.0.0', port=port)
+
+def ping_self():
+    base_url = os.getenv('LIVE_URL')
+    while not keep_alive_event.is_set():
+        try:
+            requests.get(f"{base_url}/ping")
+            logging.info("Keep-alive ping sent")
+        except Exception as e:
+            logging.error(f"Ping failed: {str(e)}")
+        time.sleep(10)
+
+@app.route('/')
+def home():
+    return "Bot is running", 200
+
+@app.route('/ping')
+def ping():
+    return "pong", 200
 
 if __name__ == "__main__":
-    main()
-    # check_and_comment()
+    # Start web server
+    server_thread = Thread(target=start_server)
+    server_thread.start()
+
+    # Start ping keep-alive
+    ping_thread = Thread(target=ping_self)
+    ping_thread.start()
+
+    # Start scheduler
+    scheduler_thread = Thread(target=run_scheduler)
+    scheduler_thread.start()
+
+    # Initial check
+    check_and_comment()
+
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        keep_alive_event.set()
+        server_thread.join()
+        ping_thread.join()
+        scheduler_thread.join()
+
+# def main():
+#     logging.info("=== Bot Started ===")
+#     # Initial check
+#     check_and_comment()
+    
+#     # Schedule hourly checks
+#     schedule.every(59).minutes.do(check_and_comment)
+    
+#     while True:
+#         schedule.run_pending()
+#         time.sleep(60)
+
+# if __name__ == "__main__":
+#     main()
+#     # check_and_comment()
 
 # if __name__ == "__main__":
 #     logging.info("Session started")
