@@ -105,18 +105,18 @@ def check_and_comment():
             if post.id not in processed and not post.locked:
                 reply_text = generate_reply(post.title)
                 if reply_text:
-                    # post.reply(reply_text)
+                    post.reply(reply_text)
                     save_processed_post(post.id)
                     logging.info(f"Commented on {post.title} #({post.id}): {reply_text}")
                     print(f"✅ Commented on: {post.title}")
                     print(f"💬 {reply_text}\n")
                     return
     except Exception as e:
-        logging.error(f"Reddit error: {str(e)}")
+        print(f"Reddit error: {str(e)}")
 
 
 def schedule_loop():
-    print("initial ping")
+    print(">>> [initial] check_and_comment")
     check_and_comment()
 
     schedule.every(59).minutes.do(check_and_comment)
@@ -146,6 +146,7 @@ def home():
 
 @app.route('/ping')
 def ping():
+    print(">>> server pinged")
     return "pong", 200
 
 
