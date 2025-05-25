@@ -46,7 +46,6 @@ It reads fresh posts from r/AskReddit, crafts replies with sarcastic humor, slan
    python main.py
    ```
 
----
 
 ## Important notes
 
@@ -56,10 +55,6 @@ It reads fresh posts from r/AskReddit, crafts replies with sarcastic humor, slan
 * Keep your credentials safe and never share your `.env`.
 * The bot’s output is intentionally imperfect
 
----
-
-
----
 
 ## Dependencies
 
@@ -69,13 +64,11 @@ It reads fresh posts from r/AskReddit, crafts replies with sarcastic humor, slan
 * [schedule](https://pypi.org/project/schedule/)
 * [python-dotenv](https://pypi.org/project/python-dotenv/)
 
----
 
 ## License
 
 For education and experimentation only. No warranties. Not liable for any damage or bans resulting from usage.
 
----
 
 ### Why this name?
 
