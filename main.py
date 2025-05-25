@@ -151,6 +151,12 @@ def ping():
     print(">>> server pinged")
     return "pong", 200
 
+@app.route('/check_and_comment')
+def ping():
+    print(">>> [API] run threads")
+    check_and_comment()
+    return "pong", 200
+
 
 if __name__ == "__main__":
     print("=== Bot Started ===")
