@@ -13,4 +13,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE $PORT
 
 # Start your bot
-CMD ["python", "main.py"]
+# CMD ["python", "main.py"]
+# CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:$PORT", "--workers", "1", "--log-level", "error"]
+CMD ["gunicorn", "--bind", "0.0.0.0:10000", "--timeout", "600", "main:app"]
