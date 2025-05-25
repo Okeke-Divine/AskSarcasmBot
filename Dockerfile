@@ -10,10 +10,7 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose the port Flask uses
-EXPOSE 8000
-
-# Set environment variable for Flask port (Render auto-uses this)
-ENV PORT=8000
+EXPOSE $PORT
 
 # Start your bot
 CMD ["python", "main.py"]
