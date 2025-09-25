@@ -1,6 +1,6 @@
 # AskSarcasmBot
 
-A Reddit bot that replies to new AskReddit posts with responses that sound 100% human — sarcastic, casual, and imperfect.
+A Reddit bot that replies to new AskReddit posts with responses that sound 100% human (sarcastic, casual, and imperfect).
 Powered by Cohere’s language model and PRAW for Reddit interaction.
 
 
